@@ -41,7 +41,28 @@ var CategorySchema = new Schema({
       required: 'name cannot be blank',
       // wires in a custom validator function (http://mongoosejs.com/docs/api.html#schematype_SchemaType-validate).
       validate: [validateLength, 'name must be 15 chars in length or less']
-  }
+  },
+  quantityPerUnit: {
+		type: String
+	},
+	unitPrice: {
+		type: Number,
+		default: 0
+	},
+	unitsInStock: {
+		type: Number,
+		default: 0,
+		min: 0
+	},
+	unitsOnOrder: {
+		type: Number,
+		default: 0,
+		min: 0
+	},
+	discontinued: {
+		type: Boolean,
+		default: false
+	}
 });
 
 // Expose the model to other objects (similar to a 'public' setter).

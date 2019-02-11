@@ -30,6 +30,7 @@ exports.create = function (req, res) {
  * Show the current Category
  */
 exports.read = function (req, res) {
+  /*
   Category.findById(req.params.categoryId).exec(function(err,category){
     if (err){
       return res.status(400).send({
@@ -45,6 +46,9 @@ exports.read = function (req, res) {
     }
 
   });
+  */
+
+  res.json(req.category);
 };
 
 /**
@@ -52,13 +56,37 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
 
+  //crianod um objeto 
+  var category = req.category;
+
+  category = _.extend(category, req.body);
+
+  category.save(function(err){
+    if (err){
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }else{
+      res.json(category);
+    }
+  });
 };
 
 /**
  * Delete an Category
  */
 exports.delete = function (req, res) {
+  var category = req.category;
 
+	category.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(category);
+		}
+	});
 };
 
 /**
@@ -74,4 +102,27 @@ exports.list = function (req, res) {
       res.json(categories);
     }
   });
+};
+
+/**
+ * Category middleware
+ */
+exports.categoryByID = function(req, res, next, id) {
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(400).send({
+			message: 'Category is invalid'
+		});
+	}
+
+	Category.findById(id).exec(function(err, category) {
+		if (err) return next(err);
+		if (!category) {
+			return res.status(404).send({
+  				message: 'Category not found'
+  			});
+		}
+		req.category = category;
+		next();
+	});
 };

@@ -4,11 +4,19 @@ module.exports = function(app) {
 
   var categories = require('../../server/controllers/category.server.controller');
 
-   app.route('/categories')
-   .get(categories.list)
-   .post(categories.create);
+  app.route('/categories')
+  .get(categories.list)
+  .post(categories.create);
 
-   //find by ID
-   app.route('/categories/:categoryId')
-    .get(categories.read);
+  app.route('/categories/:categoryId')
+  .get(categories.read)
+  .put(categories.update)
+  .delete(categories.delete);
+
+  // a funcao find by id está sendo implementada por esse middleware
+	// Finish by binding the article middleware
+	// What's this? Where the categoryId is present in the URL
+	// the logic to 'get by id' is handled by this single function
+	// and added to the request object i.e. request.category.
+	app.param('categoryId', categories.categoryByID);
 };
