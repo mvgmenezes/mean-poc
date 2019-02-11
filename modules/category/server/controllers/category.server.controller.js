@@ -5,6 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  Category = mongoose.model('Category'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -12,14 +13,38 @@ var path = require('path'),
  * Create a Category
  */
 exports.create = function (req, res) {
+  var category = new Category(req.body);
 
+  category.save(function(err){
+    if (err){
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+    } else {
+        res.status(201).json(category);
+    }
+  });
 };
 
 /**
  * Show the current Category
  */
 exports.read = function (req, res) {
+  Category.findById(req.params.categoryId).exec(function(err,category){
+    if (err){
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      if (!category){
+        return res.status(404).send({
+          message: 'Category not found'
+        });
+      }
+      res.json(category);
+    }
 
+  });
 };
 
 /**
