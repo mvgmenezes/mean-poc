@@ -3,15 +3,16 @@
 module.exports = function(app) {
 
   var categories = require('../../server/controllers/category.server.controller');
+  var users = require('../../../users/server/controllers/users.server.controller');
 
   app.route('/categories')
   .get(categories.list)
-  .post(categories.create);
+  .post(users.requiresLogin, categories.create); //incluindo a necessidade do login users.requiresLogin
 
   app.route('/categories/:categoryId')
   .get(categories.read)
-  .put(categories.update)
-  .delete(categories.delete);
+  .put(users.requiresLogin,categories.update)
+  .delete(users.requiresLogin,categories.delete);
 
   // a funcao find by id está sendo implementada por esse middleware
 	// Finish by binding the article middleware

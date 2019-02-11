@@ -123,6 +123,6 @@ exports.categoryByID = function(req, res, next, id) {
   			});
 		}
 		req.category = category;
-		next();
+		next(); //funcao que permite que o middle seja criado. 
 	});
 };
