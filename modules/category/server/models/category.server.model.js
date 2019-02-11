@@ -44,4 +44,5 @@ var CategorySchema = new Schema({
   }
 });
 
+// Expose the model to other objects (similar to a 'public' setter).
 mongoose.model('Category', CategorySchema);
