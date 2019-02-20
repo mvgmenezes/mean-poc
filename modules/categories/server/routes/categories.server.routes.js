@@ -2,7 +2,7 @@
 
 module.exports = function(app) {
 
-  var categories = require('../../server/controllers/category.server.controller');
+  var categories = require('../../server/controllers/categories.server.controller');
   var users = require('../../../users/server/controllers/users.server.controller');
 
   app.route('/categories')

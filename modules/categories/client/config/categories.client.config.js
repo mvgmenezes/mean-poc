@@ -3,7 +3,7 @@
 
   // Category module config
   angular
-    .module('category')
+    .module('categories')
     .run(menuConfig);
 
   menuConfig.$inject = ['Menus'];
