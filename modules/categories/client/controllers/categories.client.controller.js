@@ -1,21 +1,8 @@
-(function() {
-  'use strict';
+'use strict';
 
-  angular
-    .module('categories')
-    .controller('CategoryController', CategoryController);
-
-  CategoryController.$inject = ['$scope'];
-
-  function CategoryController($scope) {
-    var vm = this;
-
-    // Category controller logic
-    // ...
-
-    init();
-
-    function init() {
-    }
-  }
-})();
+angular.module('categories').controller('CategoriesController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);

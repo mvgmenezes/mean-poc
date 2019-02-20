@@ -21,13 +21,13 @@
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'categories', {
       title: 'List Categories',
-      state: 'categories'
+      state: 'categorieslista'
     });
 
      // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'categories', {
       title: 'Create categories',
-      state: 'categories.create'
+      state: 'categoriescreate'
     });
 
   }

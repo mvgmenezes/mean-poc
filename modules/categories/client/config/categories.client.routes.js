@@ -1,21 +1,25 @@
-(function () {
-  'use strict';
+'use strict';
 
-  //Setting up route
-  angular
-    .module('categories')
-    .config(routeConfig);
+// Setting up route
+angular.module('categories').config(['$stateProvider',
 
-  routeConfig.$inject = ['$stateProvider'];
-
-  function routeConfig($stateProvider) {
+  function($stateProvider) {
     // Category state routing
     $stateProvider
-      .state('categories', {
+      .state('categorieslista', {
         url: '/categories',
-        templateUrl: 'modules/categories/client/views/category.client.view.html',
+        templateUrl: '/modules/categories/views/categories.client.view.html',
+        controller: 'CategoryController',
+        controllerAs: 'vm'
+      })
+      .state('categoriescreate', {
+        url: '/categories/create',
+        templateUrl: '/modules/categories/views/categories.client.create.view.html',
         controller: 'CategoryController',
         controllerAs: 'vm'
       });
   }
-})();
+]);
+
+//modules/users/client/views/settings/categories.client.view.html
+//modules/users/client/views/settings/settings.client.view.html

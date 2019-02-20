@@ -1,6 +1,5 @@
-(function (app) {
-  'use strict';
+'use strict';
 
-  app.registerModule('categories');
-}(ApplicationConfiguration));
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('categories', ['core']);
 
